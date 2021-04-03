@@ -1,0 +1,120 @@
+---
+title: '#30DayChartChallenge'
+subtitle: 'Day 1 - Part-To-Whole'
+author: "Moriah Taylor"
+date: "4/2/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Data
+To visualize parts of a whole, I decided to utilize a database of minerals I found on Kaggle (https://www.kaggle.com/vinven7/comprehensive-database-of-minerals/tasks?taskId=3190&utm_medium=social&utm_source=twitter.com&utm_campaign=task+published). 
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+library(tidyverse)
+library(lubridate)
+library(extrafont)
+library(showtext)
+library(rmarkdown)
+library(graphics)
+library(png)
+library(ggdark)
+library(ragg)
+library(ggimage)
+library(grid)
+```
+
+
+## Loading the Data and Exploring
+```{r, message=FALSE, warning=FALSE, include=TRUE, output=FALSE}
+minerals = read.csv("minerals.csv")
+#look at minerals with the most complex chemical compositions
+#minerals %>% arrange(desc(count))
+```
+
+
+## Data Visualization
+Based both on its extensive chemical composition and the fact that it's one of my favorite minerals, I chose to visualize the composition of charoite.
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#get chemical composition of charoite
+elements <- vector("character", length=9)
+counts <- numeric(9)
+charoite <- minerals[189,]
+names <- colnames(minerals)
+x = 1
+for (i in 10:136){
+  if (charoite[1,i] != 0){
+    element <- names[i]
+    amount <- as.numeric(charoite[1,i])
+    elements[x] <- element
+    counts[x] <- amount
+    x = x+1
+  }
+}
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#add custom text
+font_add(family = "marker", "PermanentMarker-Regular.ttf")
+font_add(family = "montserrat", "Montserrat-Regular.ttf")
+showtext.auto()
+
+#load image (image source: wikipedia.org)
+charoite_png <- readPNG("charoite.png")
+#prep for plot
+img <- rasterGrob(charoite_png, interpolate = TRUE)
+
+#color matching chaorite
+charoite_color = "#845b7b"
+
+#create labels
+elements[9] <- "Hydrated Water"    #changing from Hydrated.Water
+pct <- round(counts/sum(counts)*100)
+lbls <- paste(elements, pct, sep=" ")
+lbls <- paste(lbls, "%", sep="")
+df <- as.data.frame(lst(lbls, pct), col.names = c("lbls", "pct"))
+```
+
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#create theme
+plot_theme <- theme(
+  # titles
+  plot.title = element_text(family = "marker", size = 50, color = "white", hjust=0.8),
+  plot.subtitle = element_text(family = "montserrat", size = 35, color = "white", hjust = 0.8),
+  plot.caption = element_text(family = "marker", size = 28, color = "white", hjust = 1),
+  
+  # panel and plot background
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "black"),
+  plot.background = element_rect(fill = "black"),
+  
+  # axis
+  axis.title = element_blank(),
+  axis.text = element_blank(),
+  axis.ticks = element_blank(),
+)
+
+#create bar graph
+charoite_plt <- ggplot(data=df, aes(x=lbls, y=pct)) +
+  geom_bar(stat="identity", fill=charoite_color) + coord_flip() +
+  geom_text(data = df, nudge_y = 5, aes(x=lbls, y=pct, label=lbls), family="montserrat", size=8) +
+  #titles
+  labs(
+    title = "WHAT'S IN THIS ROCK?",
+    subtitle = "chemical composition of charoite",
+    caption = "Source: Kaggle | Moriah Taylor | Twitter: moriah_taylor58 | GitHub: moriahtaylor1"
+  ) + xlab("") + ylab("") +
+  #add image
+  annotation_custom(img, xmin=6, xmax=10, ymin=35, ymax=55) +
+  #theme
+  plot_theme
+
+#ggsave("charoite_plot.png",
+       #plot = charoite_plt,
+       #device = agg_png(width = 7, height = 5, units = "in", res = 300))
+```
