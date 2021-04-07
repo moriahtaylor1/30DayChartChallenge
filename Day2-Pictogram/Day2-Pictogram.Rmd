@@ -1,0 +1,98 @@
+---
+title: "#30DayChartChallenge"
+subtitle: "Day2 - Pictogram"
+author: "Moriah Taylor"
+date: "4/7/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Data
+
+Didn't get to do Week 12 of #TidyTuesday so I figured I'd finally put that Steam data to use (can be found here: https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-03-16)
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+library(tidytuesdayR)
+library(tidyverse)
+library(lubridate)
+library(extrafont)
+library(showtext)
+library(rmarkdown)
+library(png)
+library(ggdark)
+library(ragg)
+library(ggimage)
+library(magick)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#load data
+tuesdata <- tidytuesdayR::tt_load('2021-03-16')
+games <- tuesdata$games
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#get all games played in April 2020 filtered by average no. of players
+lockdown_games <- games %>%
+  filter(year == 2020) %>%
+  filter(month == "April") %>%
+  arrange(desc(avg))
+
+#get top 10 games
+top_lockdown_games = lockdown_games[1:10, ]
+```
+
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+df <- data.frame(game = top_lockdown_games$gamename,
+                 avg_players = (top_lockdown_games$avg/1000))
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#add custom text
+font_add(family = "gamer", "PressStart2P-Regular.ttf")
+font_add(family = "montserrat", "Montserrat-Regular.ttf")
+showtext.auto()
+
+#create theme
+plot_theme <- theme(
+  # titles
+  plot.title = element_text(family = "marker", size = 50, color = "white", hjust=0.8),
+  plot.subtitle = element_text(family = "montserrat", size = 35, color = "white", hjust = 0.8),
+  plot.caption = element_text(family = "marker", size = 28, color = "white", hjust = 1),
+  
+  # panel and plot background
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "black"),
+  plot.background = element_rect(fill = "black"),
+  
+  # axis
+  axis.title = element_blank(),
+  axis.text = element_blank(),
+  axis.ticks = element_blank(),
+)
+
+games_plot <- ggplot(df, aes(x=game, y=avg_players)) + coord_flip() + geom_point()
+
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+games_plot
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+
+```
+
