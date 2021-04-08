@@ -10,8 +10,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## The Data
-
+## The Data  
 Didn't get to do Week 12 of #TidyTuesday so I figured I'd finally put that Steam data to use (can be found here: https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-03-16)
 
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
@@ -45,24 +44,28 @@ lockdown_games <- games %>%
 top_lockdown_games = lockdown_games[1:10, ]
 ```
 
-
-```{r, message=FALSE, warning=FALSE, include=TRUE}
-df <- data.frame(game = top_lockdown_games$gamename,
-                 avg_players = (top_lockdown_games$avg/1000))
-```
-
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
 #add custom text
 font_add(family = "gamer", "PressStart2P-Regular.ttf")
-font_add(family = "montserrat", "Montserrat-Regular.ttf")
+font_add(family = "quicksand", "Quicksand.ttf")
+font_add(family = "concert", "ConcertOne-Regular.ttf")
 showtext.auto()
+
+#create labels
+thousands <- round(top_lockdown_games$avg/1000, 1)
+labelings <- paste(thousands, "K", sep="")
+
+#create dataframe
+df <- data.frame(game = top_lockdown_games$gamename,
+                 avg_players = top_lockdown_games$avg,
+                 lbls = labelings)
 
 #create theme
 plot_theme <- theme(
   # titles
-  plot.title = element_text(family = "marker", size = 50, color = "white", hjust=0.8),
-  plot.subtitle = element_text(family = "montserrat", size = 35, color = "white", hjust = 0.8),
-  plot.caption = element_text(family = "marker", size = 28, color = "white", hjust = 1),
+  plot.title = element_text(family = "gamer", size = 50, color = "#8aff09", hjust=1),
+  plot.subtitle = element_text(family = "quicksand", size = 30, color = "white", hjust = 1),
+  plot.caption = element_text(family = "quicksand", size = 28, color = "white", hjust = 0.5),
   
   # panel and plot background
   panel.grid.major = element_blank(),
@@ -72,16 +75,29 @@ plot_theme <- theme(
   
   # axis
   axis.title = element_blank(),
-  axis.text = element_blank(),
+  axis.text.y = element_text(family="concert", size=25, color="white"),
+  axis.text.x = element_blank(),
   axis.ticks = element_blank(),
 )
 
-games_plot <- ggplot(df, aes(x=game, y=avg_players)) + coord_flip() + geom_point()
-
+games_plot <- ggplot(df, aes(x=game, y=avg_players)) +
+  coord_flip() + geom_bar(stat="identity", fill="#000000") + geom_point(color="white") + 
+  geom_text(data = df, nudge_y = 50000, aes(x=game, y=avg_players, label=lbls), family="concert", size=10, 
+            color = "white") +
+  #title, subtitle, and caption
+  labs(
+    title = "TOP LOCKDOWN GAMES",
+    subtitle = "average number of players at any given time during the COVID lockdown in April 2020",
+    caption = "Source: Steam | Moriah Taylor | Twitter: moriah_taylor58 | GitHub: moriahtaylor1") + 
+  xlab("") + ylab("") + plot_theme
+      
+games_plot
 ```
 
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
-games_plot
+ggsave("games_plot_unfinished.png",
+       plot = games_plot,
+       device = agg_png(width = 7, height = 5, units = "in", res = 300))
 ```
 
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
