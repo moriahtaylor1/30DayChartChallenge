@@ -10,7 +10,8 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## The Data
+## The Data - Gold Prices
+
 I found data on historical annual and monthly gold prices dating back to 1950 on Kaggle. The data is sourced from DataHub.
 
 ```{r, message=FALSE, warning=FALSE, include=TRUE}

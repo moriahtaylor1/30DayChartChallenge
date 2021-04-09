@@ -10,7 +10,8 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## The Data  
+## The Data - Video Game Players on Steam
+
 Didn't get to do Week 12 of #TidyTuesday so I figured I'd finally put that Steam data to use (can be found here: https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-03-16)
 
 ```{r, message=FALSE, warning=FALSE, include=TRUE}

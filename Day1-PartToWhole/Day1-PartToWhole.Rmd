@@ -10,7 +10,8 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## The Data
+## The Data - Minerals
+
 To visualize parts of a whole, I decided to utilize a database of minerals I found on Kaggle (https://www.kaggle.com/vinven7/comprehensive-database-of-minerals/tasks?taskId=3190&utm_medium=social&utm_source=twitter.com&utm_campaign=task+published). 
 
 ```{r, message=FALSE, warning=FALSE, include=TRUE}
