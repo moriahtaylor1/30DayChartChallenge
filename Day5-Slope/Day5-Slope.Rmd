@@ -193,7 +193,7 @@ methane_plot <- ggplot(ghg_countries, aes(x=year, y=methane)) + geom_point(aes(c
   labs(
     title = "Methane Emissions [2000 vs. 2016]",
     caption = "Source - Our World in Data | Moriah Taylor | Twitter - moriah_taylor58 | GitHub - moriahtaylor1") + 
-  xlab("") + ylab("Million Tonnes of CO2") + plot_theme
+  xlab("") + ylab("Equivalent Million Tonnes of CO2") + plot_theme
 
 ggsave("methane_plot.png",
        plot = methane_plot,
@@ -209,7 +209,7 @@ methane_plot_cb <- ggplot(ghg_countries, aes(x=year, y=methane)) + geom_point(ae
   labs(
     title = "Methane Emissions [2000 vs. 2016]",
     caption = "Source - Our World in Data | Moriah Taylor | Twitter - moriah_taylor58 | GitHub - moriahtaylor1") + 
-  xlab("") + ylab("Million Tonnes of CO2") + plot_theme2
+  xlab("") + ylab("Equivalent Million Tonnes of CO2") + plot_theme2
 
 ggsave("methane_plot_cb.png",
        plot = methane_plot_cb,
@@ -227,7 +227,7 @@ nitrous_oxide_plot <- ggplot(ghg_countries, aes(x=year, y=nitrous_oxide)) + geom
   labs(
     title = "Nitrous Oxide Emissions [2000 vs. 2016]",
     caption = "Source - Our World in Data | Moriah Taylor | Twitter - moriah_taylor58 | GitHub - moriahtaylor1") + 
-  xlab("") + ylab("Million Tonnes of CO2") + plot_theme
+  xlab("") + ylab("Equivalent Million Tonnes of CO2 equivalent") + plot_theme
 
 ggsave("nitrous_oxide_plot.png",
        plot = nitrous_oxide_plot,
@@ -243,7 +243,7 @@ nitrous_oxide_plot_cb <- ggplot(ghg_countries, aes(x=year, y=nitrous_oxide)) + g
   labs(
     title = "Nitrous Oxide Emissions [2000 vs. 2016]",
     caption = "Source - Our World in Data | Moriah Taylor | Twitter - moriah_taylor58 | GitHub - moriahtaylor1") + 
-  xlab("") + ylab("Million Tonnes of CO2") + plot_theme2
+  xlab("") + ylab("Equivalent Million Tonnes of CO2") + plot_theme2
 
 ggsave("nitrous_oxide_plot_cb.png",
        plot = nitrous_oxide_plot_cb,
@@ -261,7 +261,7 @@ total_ghg_plot <- ggplot(ghg_countries, aes(x=year, y=total_ghg)) + geom_point(a
   labs(
     title = "Total GHG Emissions [2000 vs. 2016]",
     caption = "Source - Our World in Data | Moriah Taylor | Twitter - moriah_taylor58 | GitHub - moriahtaylor1") + 
-  xlab("") + ylab("Million Tonnes of CO2") + plot_theme
+  xlab("") + ylab("Equivalent Million Tonnes of CO2") + plot_theme
 
 ggsave("total_ghg_plot.png",
        plot = total_ghg_plot,
@@ -277,7 +277,7 @@ total_ghg_plot_cb <- ggplot(ghg_countries, aes(x=year, y=total_ghg)) + geom_poin
   labs(
     title = "Total GHG Emissions [2000 vs. 2016]",
     caption = "Source - Our World in Data | Moriah Taylor | Twitter - moriah_taylor58 | GitHub - moriahtaylor1") + 
-  xlab("") + ylab("Million Tonnes of CO2") + plot_theme2
+  xlab("") + ylab("Equivalent Million Tonnes of CO2") + plot_theme2
 
 ggsave("total_ghg_plot_cb.png",
        plot = total_ghg_plot_cb,
