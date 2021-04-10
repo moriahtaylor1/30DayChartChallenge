@@ -1,0 +1,55 @@
+---
+title: "Day 7 - Physical"
+author: "Moriah Taylor"
+date: "4/9/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+#load packages
+library(tidyverse)    #data wrangling
+library(dplyr)    #tidyverse
+library(data.table)    #data table methods
+library(BBmisc)    #misc helper functions
+library(ggplot2)    #plotting
+library(extrafont)    #font
+library(showtext)    #font
+library(ragg)    #save plots
+library(SDAR)    #stratigraphy
+library(readxl)    #read excel files
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+grand_canyon <- read_excel("grand_canyon.xlsx")
+fossils_data <- read_excel()
+
+
+```
+
+```{r, message=FALSE, warning=FALSE, include=TRUE}
+fpath <- system.file("extdata", "SDAR_v0.95_intervals_saltarin.xlsx", package = "SDAR")
+bioturbation_data <- read_excel(fpath, sheet = "bioturbation")
+# import core_number data
+core_number_data <- read_excel(fpath, sheet = "core_number")
+# import samples data
+samples_data <- read_excel(fpath, sheet = "samples")
+# import sedimentary structures data
+sed_structures_data <- read_excel(fpath, sheet = "sed_structures")
+# import fossils data
+fossils_data <- read_excel(fpath, sheet = "fossils")
+# import other symbols data
+other_symbols_data <- read_excel(fpath, sheet = "other_symbols")
+# import lithostratigraphy data
+litho_data <- read_excel(fpath, sheet = "lithostra")
+# import chronostratigraphy data
+crono_data <- read_excel(fpath, sheet = "chronostra")
+```
+
+```{r message=FALSE, warning=FALSE, include=TRUE}
+plot(strata(beds_data))
+```
+
