@@ -181,11 +181,8 @@ plot_theme <- theme(
   #multi-plot text titles
   strip.text = element_text(family="title2", size=20),
   
-  #legend
-  legend.title = element_blank(),
-  legend.text = element_text(family = "title", size=30, color="black"),
-  legend.background = element_rect(fill="#cccccc", size=0.5),
-  legend.position = "top"
+  #no legend
+  legend.position = "none"
 )
 ```
 
