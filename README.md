@@ -2,7 +2,7 @@
 A DataViz challenge created by @CedScherer and @dr_xeo on Twitter
 
 ### Day 1 - Part-To-Whole [(code)](https://github.com/moriahtaylor1/30DayChartChallenge/blob/main/Day01-PartToWhole/Day1-PartToWhole.Rmd)
-![.Plots/Day01-PartToWhole.png](https://github.com/moriahtaylor1/30DayChartChallenge/blob/main/Plots/Day01-PartToWhole.png)
+![.Plots/Day01-PartToWhole.png](https://github.com/moriahtaylor1/30DayChartChallenge/blob/main/Plots/Day01-PartToWhole.png=200x)
 
 ### Day 2 - Pictogram [(code)](https://github.com/moriahtaylor1/30DayChartChallenge/blob/main/Day02-Pictogram/Day2-Pictogram.Rmd)
 ![.Plots/Day02-Pictogram.png](https://github.com/moriahtaylor1/30DayChartChallenge/blob/main/Plots/Day02-Pictogram.png)
