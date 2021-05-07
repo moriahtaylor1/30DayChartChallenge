@@ -1,5 +1,5 @@
 #ALL OF THIS CODE COMES FROM MICHAEL FREEMAN (@mf_viz on Twitter)
-#I did not write this code, I just chose the image
+#I did not write this code, I just chose the image and made some minor adjustments
 
 
 #packages
